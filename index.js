@@ -1,27 +1,29 @@
 const myLibrary = [
 ];
 
-function Book(title, author, read) {
-  this.title = title;
-  this.author = author;
-  this.read = read;
-  this.index = myLibrary.length; // Book is the last one in the array
-}
+class Book {
+  constructor(title, author, read) {
+    this.title = title;
+    this.author = author;
+    this.read = read;
+    this.index = myLibrary.length;
+  }
 
-Book.prototype.updateRead = (book) => {
-  book.read = book.read ? false : true; // Toggle book read status
+  updateRead() {
+    this.read = this.read ? false : true; // Toggle book read status
 
-  let card = document.body.querySelector(`[data-book-index='${book.index}']`);
-  let readStatus = card.querySelector(".book-read");
-
-  // Switch read status
-  readStatus.removeChild(readStatus.firstChild);
-  readStatus.appendChild(document.createTextNode(book.read ? "Read" : "Unread"));
-
-  // Switch read status button text
-  let readButton = card.querySelector(".read-button");
-  readButton.textContent = book.read ? "Didn't finish" : "Finished";
-
+    //Should probably have display logic somewhere else...
+    let card = document.body.querySelector(`[data-book-index='${book.index}']`);
+    let readStatus = card.querySelector(".book-read");
+  
+    // Switch read status
+    readStatus.removeChild(readStatus.firstChild);
+    readStatus.appendChild(document.createTextNode(book.read ? "Read" : "Unread"));
+  
+    // Switch read status button text
+    let readButton = card.querySelector(".read-button");
+    readButton.textContent = book.read ? "Didn't finish" : "Finished";
+  }
 }
 
 function Library() {
